@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fusion Quiz — Team Games That Actually Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#06101a;--surface:#0d1a2e;--surface2:#122240;
+  --cyan:#00d4ff;--gold:#ffc107;--orange:#f97316;
+  --purple:#a855f7;--pink:#ec4899;
+  --text:#f0f4ff;--muted:#7a90b0;--border:#1e3050;--green:#22c55e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(6,16,26,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);transition:border-color .3s;}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:26px;color:var(--cyan);display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:700;font-size:14px;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--cyan);color:#06101a;font-weight:900;font-size:14px;padding:10px 22px;border-radius:50px;text-decoration:none;transition:all .2s;box-shadow:0 0 20px rgba(0,212,255,.3);}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(0,212,255,.5);}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;overflow:hidden;}
+.glow{position:absolute;border-radius:50%;pointer-events:none;}
+.glow1{width:800px;height:800px;background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+.glow2{width:600px;height:600px;background:radial-gradient(circle,rgba(168,85,247,.05) 0%,transparent 70%);top:20%;right:-10%;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:800;color:var(--cyan);margin-bottom:24px;animation:fadeUp .6s ease both;}
+h1{font-family:'Fredoka One',cursive;font-size:clamp(44px,8vw,92px);line-height:1.0;margin-bottom:24px;animation:fadeUp .7s ease .1s both;}
+h1 .l1{color:var(--text);display:block;}
+h1 .l2{display:block;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:clamp(16px,2.2vw,21px);color:var(--muted);max-width:580px;line-height:1.65;margin-bottom:40px;font-weight:600;animation:fadeUp .7s ease .2s both;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:64px;animation:fadeUp .7s ease .3s both;}
+.btn-main{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-family:'Fredoka One',cursive;font-size:20px;padding:18px 40px;border-radius:50px;text-decoration:none;box-shadow:0 0 40px rgba(0,212,255,.25);transition:all .25s;display:inline-flex;align-items:center;gap:10px;}
+.btn-main:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 60px rgba(0,212,255,.45);}
+.btn-ghost{background:transparent;color:var(--text);font-family:'Fredoka One',cursive;font-size:20px;padding:17px 38px;border-radius:50px;text-decoration:none;border:2px solid var(--border);transition:all .25s;display:inline-flex;align-items:center;gap:10px;}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px);}
+
+/* PREVIEW */
+.hero-preview{width:100%;max-width:880px;animation:fadeUp .8s ease .4s both;position:relative;}
+.float-stat{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 18px;box-shadow:0 8px 32px rgba(0,0,0,.4);animation:float 3s ease-in-out infinite;}
+.fs-left{left:-55px;top:30%;animation-delay:0s;}
+.fs-right{right:-55px;top:60%;animation-delay:1.5s;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.stat-n{font-family:'Fredoka One',cursive;font-size:22px;color:var(--cyan);}
+.stat-l{color:var(--muted);font-size:11px;font-weight:700;}
+.frame{background:var(--surface);border:2px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 60px rgba(0,212,255,.08);}
+.frame-bar{background:var(--surface2);padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.dot{width:12px;height:12px;border-radius:50%;}
+.dot.r{background:#ff5f57;}.dot.y{background:#febc2e;}.dot.g{background:#28c840;}
+.frame-url{background:var(--bg);border-radius:6px;padding:4px 16px;font-size:12px;color:var(--muted);margin-left:8px;font-weight:700;}
+.frame-body{padding:32px;display:flex;flex-direction:column;align-items:center;gap:18px;background:radial-gradient(ellipse at 50% 0%,#0a1a2e,var(--bg));min-height:300px;}
+.prev-timer{font-family:'Fredoka One',cursive;font-size:60px;color:var(--gold);line-height:1;}
+.prev-q{font-family:'Fredoka One',cursive;font-size:clamp(16px,2.8vw,24px);text-align:center;max-width:560px;}
+.prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:560px;}
+.prev-btn{border:none;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px;cursor:pointer;transition:transform .15s;color:#fff;}
+.prev-btn:hover{transform:scale(.97);}
+.pa{background:#e53e3e;}.pb{background:#3182ce;}.pc{background:#d69e2e;}.pd{background:#38a169;}
+.pb-sym{font-size:20px;}
+.prev-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.prev-chip{background:rgba(255,255,255,.08);border-radius:50px;padding:6px 14px;font-size:13px;font-weight:700;}
+
+/* SOCIAL PROOF BAR */
+.proof-bar{display:flex;align-items:center;justify-content:center;gap:32px;padding:20px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.proof-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--muted);}
+.proof-icon{font-size:20px;}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:96px 48px;max-width:1200px;margin:0 auto;}
+.sec-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:12px;display:block;}
+.sec-h{font-family:'Fredoka One',cursive;font-size:clamp(30px,5vw,54px);line-height:1.1;margin-bottom:14px;}
+.sec-sub{font-size:17px;color:var(--muted);max-width:580px;line-height:1.65;font-weight:600;}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:28px;margin-top:56px;}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:30px 26px;transition:all .3s;position:relative;overflow:hidden;}
+.step::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.04),transparent);opacity:0;transition:opacity .3s;}
+.step:hover{border-color:rgba(0,212,255,.3);transform:translateY(-4px);}
+.step:hover::after{opacity:1;}
+.step-n{font-family:'Fredoka One',cursive;font-size:60px;color:rgba(0,212,255,.09);line-height:1;margin-bottom:6px;}
+.step-ico{font-size:34px;margin-bottom:14px;display:block;}
+.step-t{font-family:'Fredoka One',cursive;font-size:20px;margin-bottom:8px;}
+.step-d{font-size:13px;color:var(--muted);line-height:1.7;font-weight:600;}
+
+/* FEATURES */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:56px;}
+.feat{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:26px;transition:all .3s;}
+.feat.hi{border-color:rgba(0,212,255,.28);background:linear-gradient(135deg,rgba(0,212,255,.05),var(--surface));}
+.feat:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.feat-ico{font-size:38px;margin-bottom:14px;display:block;}
+.feat-t{font-family:'Fredoka One',cursive;font-size:19px;margin-bottom:8px;}
+.feat-d{font-size:13px;color:var(--muted);line-height:1.7;font-weight:600;}
+.feat-tag{display:inline-block;background:rgba(0,212,255,.1);color:var(--cyan);font-size:10px;font-weight:800;padding:4px 10px;border-radius:50px;margin-top:12px;letter-spacing:1px;text-transform:uppercase;}
+
+/* USE CASES */
+.usecases{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-top:44px;}
+.uc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;transition:all .25s;}
+.uc:hover{border-color:rgba(255,193,7,.3);transform:translateY(-3px);background:linear-gradient(135deg,rgba(255,193,7,.04),var(--surface));}
+.uc-ico{font-size:34px;margin-bottom:10px;display:block;}
+.uc-t{font-family:'Fredoka One',cursive;font-size:17px;margin-bottom:5px;}
+.uc-d{font-size:12px;color:var(--muted);font-weight:600;line-height:1.6;}
+
+/* TESTIMONIALS */
+#testi{overflow:hidden;padding:80px 0;}
+.testi-h{padding:0 48px;margin-bottom:44px;}
+.ttrack{display:flex;gap:22px;animation:scroll 32s linear infinite;width:max-content;padding:0 22px;}
+.ttrack:hover{animation-play-state:paused;}
+@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:26px;width:330px;flex-shrink:0;transition:border-color .2s;}
+.tc:hover{border-color:rgba(0,212,255,.2);}
+.tc-stars{color:var(--gold);font-size:15px;margin-bottom:12px;letter-spacing:2px;}
+.tc-text{font-size:14px;line-height:1.7;color:var(--text);font-weight:600;margin-bottom:18px;}
+.tc-author{display:flex;align-items:center;gap:10px;}
+.tc-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;font-family:'Fredoka One',cursive;flex-shrink:0;}
+.tc-name{font-weight:800;font-size:13px;}
+.tc-role{font-size:11px;color:var(--muted);font-weight:600;}
+
+/* PRICING */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;align-items:start;}
+.pc{background:var(--surface);border:2px solid var(--border);border-radius:24px;padding:34px 26px;transition:all .3s;position:relative;}
+.pc.pop{border-color:var(--cyan);background:linear-gradient(180deg,rgba(0,212,255,.06) 0%,var(--surface) 100%);transform:scale(1.04);box-shadow:0 0 60px rgba(0,212,255,.13);}
+.pc:hover{transform:translateY(-4px) scale(1.01);}
+.pc.pop:hover{transform:translateY(-4px) scale(1.05);}
+.pop-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#06101a;font-size:10px;font-weight:900;padding:5px 16px;border-radius:0 0 12px 12px;letter-spacing:2px;text-transform:uppercase;}
+.p-name{font-family:'Fredoka One',cursive;font-size:22px;margin-bottom:5px;}
+.p-desc{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:22px;}
+.p-price{display:flex;align-items:baseline;gap:3px;margin-bottom:26px;}
+.p-num{font-family:'Fredoka One',cursive;font-size:52px;color:var(--gold);line-height:1;}
+.p-dollar{font-size:26px;color:var(--gold);font-family:'Fredoka One',cursive;}
+.p-mo{color:var(--muted);font-size:13px;font-weight:700;align-self:flex-end;padding-bottom:5px;}
+.p-feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
+.p-feats li{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:700;color:var(--muted);}
+.p-feats li::before{content:'✓';color:var(--green);font-size:15px;flex-shrink:0;}
+.p-feats li.dim::before{content:'—';color:var(--border);}
+.p-feats li.dim{opacity:.38;}
+.p-btn{display:block;width:100%;text-align:center;padding:15px;border-radius:14px;font-family:'Fredoka One',cursive;font-size:17px;text-decoration:none;transition:all .2s;}
+.p-outline{border:2px solid var(--border);color:var(--text);}
+.p-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.p-fill{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 0 28px rgba(0,212,255,.18);}
+.p-fill:hover{transform:scale(1.02);box-shadow:0 0 40px rgba(0,212,255,.35);}
+.p-gold{background:linear-gradient(135deg,var(--gold),var(--orange));color:#06101a;}
+.p-gold:hover{transform:scale(1.02);}
+
+/* CTA BANNER */
+.cta-wrap{margin:0 48px 80px;background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(168,85,247,.1));border:1px solid rgba(0,212,255,.2);border-radius:28px;padding:72px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta-wrap::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+.cta-t{font-family:'Fredoka One',cursive;font-size:clamp(30px,5vw,54px);margin-bottom:14px;position:relative;}
+.cta-s{font-size:17px;color:var(--muted);margin-bottom:38px;font-weight:600;position:relative;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;max-width:1200px;margin:0 auto;}
+.f-brand .nav-logo{margin-bottom:14px;display:inline-flex;}
+.f-brand p{font-size:13px;color:var(--muted);line-height:1.7;font-weight:600;max-width:240px;}
+.f-col h4{font-family:'Fredoka One',cursive;font-size:15px;margin-bottom:14px;}
+.f-col a{display:block;color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:9px;transition:color .2s;}
+.f-col a:hover{color:var(--cyan);}
+.f-bottom{border-top:1px solid var(--border);padding:22px 48px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:600;max-width:1200px;margin:0 auto;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  section{padding:60px 20px;}
+  .pgrid{grid-template-columns:1fr;}
+  .pc.pop{transform:none;}
+  footer{grid-template-columns:1fr 1fr;gap:28px;padding:28px 20px;}
+  .f-bottom{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}
+  .cta-wrap{margin:0 20px 60px;padding:44px 24px;}
+  .fs-left,.fs-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">⚡ Fusion<span>Quiz</span></a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testi">Reviews</a>
+  </div>
+  <a href="#pricing" class="nav-cta">Start Free Trial →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+  <div class="hero-badge">⚡ Now with AI questions & DALL-E 3 images</div>
+  <h1>
+    <span class="l1">Quiz Games Your</span>
+    <span class="l2">Team Will Love</span>
+  </h1>
+  <p class="hero-sub">Run live multiplayer quiz games with your team in minutes. AI builds the questions. DALL-E creates the images. You just hit play.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-main">🚀 Start Free Trial</a>
+    <a href="#how" class="btn-ghost">▶ See How It Works</a>
+  </div>
+
+  <!-- Game preview mockup -->
+  <div class="hero-preview">
+    <div class="float-stat fs-left">
+      <div class="stat-n">2,400+</div>
+      <div class="stat-l">Games Played</div>
+    </div>
+    <div class="float-stat fs-right">
+      <div class="stat-n">98%</div>
+      <div class="stat-l">Teams Love It</div>
+    </div>
+    <div class="frame">
+      <div class="frame-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="frame-url">fusionquiz.app · LIVE GAME · 12 players</div>
+      </div>
+      <div class="frame-body">
+        <div class="prev-timer" id="ptimer">18</div>
+        <div class="prev-q">What is the most important first step in water damage restoration?</div>
+        <div class="prev-grid">
+          <button class="prev-btn pa"><span class="pb-sym">▲</span>Dry the area first</button>
+          <button class="prev-btn pb"><span class="pb-sym">◆</span>Remove the water source</button>
+          <button class="prev-btn pc"><span class="pb-sym">●</span>Apply disinfectant</button>
+          <button class="prev-btn pd"><span class="pb-sym">■</span>Document the damage</button>
+        </div>
+        <div class="prev-chips">
+          <div class="prev-chip">📷 Sarah · 1,240</div>
+          <div class="prev-chip">📷 Mike · 980</div>
+          <div class="prev-chip">📷 Ana · 1,580</div>
+          <div class="prev-chip">📷 Tom · 760</div>
+          <div class="prev-chip">+8 more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item"><span class="proof-icon">🏢</span>50+ companies</div>
+  <div class="proof-item"><span class="proof-icon">👥</span>500+ teams onboarded</div>
+  <div class="proof-item"><span class="proof-icon">❓</span>100,000+ questions answered</div>
+  <div class="proof-item"><span class="proof-icon">⭐</span>4.9/5 rating</div>
+  <div class="proof-item"><span class="proof-icon">🤖</span>Powered by Claude AI</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <span class="sec-label reveal">How It Works</span>
+  <h2 class="sec-h reveal">Up and running in<br>under 5 minutes</h2>
+  <p class="sec-sub reveal">No downloads. No setup. Works on any device. Your team just needs a browser.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-n">01</div>
+      <span class="step-ico">🤖</span>
+      <div class="step-t">AI Builds Your Quiz</div>
+      <p class="step-d">Type a topic or upload your training docs. Claude AI writes the questions, DALL-E 3 generates images for each one — all in under 60 seconds.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-n">02</div>
+      <span class="step-ico">🎡</span>
+      <div class="step-t">Spin to Pick</div>
+      <p class="step-d">Use the spinning wheel to randomly select from up to 12 quiz packs. Or browse your library and choose manually. Start with one tap.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-n">03</div>
+      <span class="step-ico">📱</span>
+      <div class="step-t">Players Join Instantly</div>
+      <p class="step-d">Share a 6-digit room code. Players join from any phone or laptop — no app needed. They add a selfie photo for the podium moment.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-n">04</div>
+      <span class="step-ico">🏆</span>
+      <div class="step-t">Play & Celebrate</div>
+      <p class="step-d">Lightning rounds, bonus multipliers, streaks, power-ups, dramatic announcements, seasonal music, and a selfie podium. It's a full game show.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <span class="sec-label reveal">Features</span>
+  <h2 class="sec-h reveal">Everything you need<br>to run great games</h2>
+  <p class="sec-sub reveal">Built from the ground up for team engagement — not another boring survey tool.</p>
+  <div class="feats">
+    <div class="feat hi reveal">
+      <span class="feat-ico">🤖</span>
+      <div class="feat-t">AI Quiz Generation</div>
+      <p class="feat-d">Describe any topic or upload a PDF — Claude AI writes perfect multiple-choice questions instantly. Great for onboarding, training, and compliance.</p>
+      <span class="feat-tag">Powered by Claude</span>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">🎨</span>
+      <div class="feat-t">DALL-E 3 Images</div>
+      <p class="feat-d">Every question gets a custom AI-generated image that perfectly illustrates the topic. No stock photos. No generic results. Just perfect visuals every time.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">⚡</span>
+      <div class="feat-t">Live Special Events</div>
+      <p class="feat-d">Lightning rounds, 2x/3x bonus questions, risky questions, and dramatic full-screen announcements that create genuine excitement.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">🎡</span>
+      <div class="feat-t">Spin the Wheel</div>
+      <p class="feat-d">A canvas-animated spinning wheel that randomly picks from up to 12 quiz packs. Perfect for recurring game nights with surprise variety.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">🔥</span>
+      <div class="feat-t">Streaks & Power-ups</div>
+      <p class="feat-d">Consecutive correct answers build streak bonuses. Players get one 50/50 power-up per game. Makes every question feel high-stakes.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">📊</span>
+      <div class="feat-t">Answer Breakdown</div>
+      <p class="feat-d">Live bar charts after every question show exactly how your team answered. See knowledge gaps, spark discussions, and celebrate correct streaks.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">🎵</span>
+      <div class="feat-t">Seasonal Music Themes</div>
+      <p class="feat-d">5 synced music themes — Modern EDM, Halloween, Christmas, Summer, Party. Switch live and all players hear the change simultaneously.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">📷</span>
+      <div class="feat-t">Selfie Podium</div>
+      <p class="feat-d">Players snap a selfie when joining. Top 3 appear on the final podium with their photo, animated crown, and gold/silver/bronze rings.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ico">💡</span>
+      <div class="feat-t">Fun Facts per Question</div>
+      <p class="feat-d">Add an explanation or fun fact to any question. It shows on both the host screen and every player's phone after the answer is revealed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section>
+  <span class="sec-label reveal">Use Cases</span>
+  <h2 class="sec-h reveal">Works for any team,<br>any occasion</h2>
+  <div class="usecases">
+    <div class="uc reveal"><span class="uc-ico">🏢</span><div class="uc-t">Team Meetings</div><p class="uc-d">Open your Monday standup with a 5-question energizer before diving into work.</p></div>
+    <div class="uc reveal"><span class="uc-ico">📚</span><div class="uc-t">Employee Training</div><p class="uc-d">Upload your training manual — AI builds a quiz from it. Make compliance fun.</p></div>
+    <div class="uc reveal"><span class="uc-ico">🎉</span><div class="uc-t">Team Events</div><p class="uc-d">Holiday parties, offsites, and team celebrations become interactive and memorable.</p></div>
+    <div class="uc reveal"><span class="uc-ico">🚀</span><div class="uc-t">New Hire Onboarding</div><p class="uc-d">Quiz new hires on company history, culture, and processes in a way they'll enjoy.</p></div>
+    <div class="uc reveal"><span class="uc-ico">🌎</span><div class="uc-t">Remote Teams</div><p class="uc-d">Works perfectly over Zoom, Teams, or Meet. No extra software — just a link.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi" style="padding:0 0 80px;max-width:none;">
+  <div class="testi-h">
+    <span class="sec-label reveal">Reviews</span>
+    <h2 class="sec-h reveal">Teams are obsessed with it</h2>
+  </div>
+  <div class="ttrack">
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"We use this every Friday to end the week. The AI builds a quiz about what we shipped that week. Completely transformed our retros."</p><div class="tc-author"><div class="tc-av">S</div><div><div class="tc-name">Sarah Chen</div><div class="tc-role">VP Engineering · TechFlow</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Our new hire onboarding was a 40-page PDF. Now it's a 20-question quiz with AI images. Completion rate went from 60% to 100%."</p><div class="tc-author"><div class="tc-av">M</div><div><div class="tc-name">Marcus Williams</div><div class="tc-role">HR Director · BuildCo</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The lightning rounds and bonus questions create genuine excitement. I've never seen my remote team this engaged in anything before."</p><div class="tc-author"><div class="tc-av">A</div><div><div class="tc-name">Ana Reyes</div><div class="tc-role">Team Lead · DesignHub</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Setup takes 2 minutes. I type a topic, AI writes 15 questions with images, and we're playing. This is how training software should work."</p><div class="tc-author"><div class="tc-av">J</div><div><div class="tc-name">James Park</div><div class="tc-role">L&D Manager · ConsultGroup</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The selfie podium is hilarious. Everyone's screenshotting to share in Slack. It's built genuine team culture in a way we didn't expect."</p><div class="tc-author"><div class="tc-av">L</div><div><div class="tc-name">Lisa Torres</div><div class="tc-role">People Ops · StartupXYZ</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"We have 3 holiday themes saved — Christmas, Halloween, Summer — and swap them seasonally. The synchronized music is such a nice touch."</p><div class="tc-author"><div class="tc-av">R</div><div><div class="tc-name">Rachel Kim</div><div class="tc-role">Office Manager · AgencyPro</div></div></div></div>
+    <!-- Duplicates for seamless loop -->
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"We use this every Friday to end the week. The AI builds a quiz about what we shipped that week. Completely transformed our retros."</p><div class="tc-author"><div class="tc-av">S</div><div><div class="tc-name">Sarah Chen</div><div class="tc-role">VP Engineering · TechFlow</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Our new hire onboarding was a 40-page PDF. Now it's a 20-question quiz with AI images. Completion rate went from 60% to 100%."</p><div class="tc-author"><div class="tc-av">M</div><div><div class="tc-name">Marcus Williams</div><div class="tc-role">HR Director · BuildCo</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The lightning rounds and bonus questions create genuine excitement. I've never seen my remote team this engaged in anything before."</p><div class="tc-author"><div class="tc-av">A</div><div><div class="tc-name">Ana Reyes</div><div class="tc-role">Team Lead · DesignHub</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Setup takes 2 minutes. I type a topic, AI writes 15 questions with images, and we're playing. This is how training software should work."</p><div class="tc-author"><div class="tc-av">J</div><div><div class="tc-name">James Park</div><div class="tc-role">L&D Manager · ConsultGroup</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The selfie podium is hilarious. Everyone's screenshotting to share in Slack. It's built genuine team culture in a way we didn't expect."</p><div class="tc-author"><div class="tc-av">L</div><div><div class="tc-name">Lisa Torres</div><div class="tc-role">People Ops · StartupXYZ</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"We have 3 holiday themes saved — Christmas, Halloween, Summer — and swap them seasonally. The synchronized music is such a nice touch."</p><div class="tc-author"><div class="tc-av">R</div><div><div class="tc-name">Rachel Kim</div><div class="tc-role">Office Manager · AgencyPro</div></div></div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="max-width:1080px;">
+  <span class="sec-label reveal">Pricing</span>
+  <h2 class="sec-h reveal">Simple, honest pricing</h2>
+  <p class="sec-sub reveal">No per-player fees. No hidden costs. Cancel anytime. 14-day free trial on every plan.</p>
+  <div class="pgrid">
+    <div class="pc reveal">
+      <div class="p-name">Starter</div>
+      <div class="p-desc">Perfect for small teams getting started</div>
+      <div class="p-price"><span class="p-dollar">$</span><span class="p-num">19</span><span class="p-mo">/month</span></div>
+      <ul class="p-feats">
+        <li>1 host account</li>
+        <li>Up to 15 players per game</li>
+        <li>5 custom quiz packs</li>
+        <li>14 built-in quiz packs</li>
+        <li>All game mechanics</li>
+        <li>Selfie podium & avatars</li>
+        <li class="dim">AI quiz generation</li>
+        <li class="dim">DALL-E 3 images</li>
+        <li class="dim">Priority support</li>
+      </ul>
+      <a href="#" class="p-btn p-outline">Start Free Trial</a>
+    </div>
+    <div class="pc pop reveal">
+      <div class="pop-badge">⚡ MOST POPULAR</div>
+      <div class="p-name" style="margin-top:18px;">Team</div>
+      <div class="p-desc">For growing teams who play regularly</div>
+      <div class="p-price"><span class="p-dollar">$</span><span class="p-num">49</span><span class="p-mo">/month</span></div>
+      <ul class="p-feats">
+        <li>3 host accounts</li>
+        <li>Up to 50 players per game</li>
+        <li>Unlimited custom quiz packs</li>
+        <li>All built-in packs</li>
+        <li>All game mechanics</li>
+        <li>Selfie podium & avatars</li>
+        <li>AI quiz generation (Claude)</li>
+        <li>DALL-E 3 image generation</li>
+        <li class="dim">Priority support</li>
+      </ul>
+      <a href="#" class="p-btn p-fill">Start Free Trial →</a>
+    </div>
+    <div class="pc reveal">
+      <div class="p-name">Business</div>
+      <div class="p-desc">For large orgs and power users</div>
+      <div class="p-price"><span class="p-dollar">$</span><span class="p-num">99</span><span class="p-mo">/month</span></div>
+      <ul class="p-feats">
+        <li>Unlimited host accounts</li>
+        <li>Unlimited players per game</li>
+        <li>Unlimited custom quiz packs</li>
+        <li>All built-in packs</li>
+        <li>All game mechanics</li>
+        <li>Selfie podium & avatars</li>
+        <li>AI quiz generation (Claude)</li>
+        <li>DALL-E 3 image generation</li>
+        <li>Priority support + onboarding</li>
+      </ul>
+      <a href="#" class="p-btn p-gold">Start Free Trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-wrap">
+  <h2 class="cta-t">Ready to run your<br>first game?</h2>
+  <p class="cta-s">14-day free trial. No credit card required. Set up in under 5 minutes.</p>
+  <div class="cta-btns">
+    <a href="#pricing" class="btn-main">🚀 Start Free Today</a>
+    <a href="mailto:hello@fusionquiz.app" class="btn-ghost">✉️ Talk to Us</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">
+    <a href="#" class="nav-logo">⚡ Fusion<span>Quiz</span></a>
+    <p>Live multiplayer quiz games powered by AI. Built for teams who want real engagement, not another boring meeting tool.</p>
+  </div>
+  <div class="f-col">
+    <h4>Product</h4>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#how">How It Works</a>
+    <a href="#">Changelog</a>
+  </div>
+  <div class="f-col">
+    <h4>Company</h4>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="f-col">
+    <h4>Legal</h4>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Cookie Policy</a>
+  </div>
+</footer>
+<div class="f-bottom">
+  <span>© 2026 Fusion Quiz by FusionCRS. All rights reserved.</span>
+  <span>Built with ⚡ · Emerald Coast, FL</span>
+</div>
+
+<script>
+// Scroll reveal with stagger
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const siblings = e.target.closest('.steps,.feats,.usecases,.pgrid')?.querySelectorAll('.reveal');
+      if(siblings){
+        [...siblings].forEach((s,i)=>{ s.style.transitionDelay=(i*0.09)+'s'; });
+      }
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Animate preview countdown
+let t=18;
+setInterval(()=>{
+  t=t>0?t-1:20;
+  const el=document.getElementById('ptimer');
+  if(el){el.textContent=t;el.style.color=t<=5?'#f97316':'#ffc107';}
+},1000);
+
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.borderBottomColor=
+    window.scrollY>60?'rgba(0,212,255,.18)':'rgba(0,212,255,.1)';
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
