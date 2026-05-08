@@ -180,6 +180,28 @@ footer{border-top:1px solid var(--border);padding:48px;display:grid;grid-templat
   .cta-wrap{margin:0 20px 60px;padding:44px 24px;}
   .fs-left,.fs-right{display:none;}
 }
+/* FAQ */
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s;}
+.faq-item:hover{border-color:rgba(0,212,255,.2);}
+.faq-q{width:100%;background:none;border:none;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--text);text-align:left;}
+.faq-arrow{color:var(--cyan);font-size:12px;transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{display:none;padding:0 24px 20px;font-size:14px;color:var(--muted);line-height:1.7;font-weight:600;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open{border-color:rgba(0,212,255,.3);background:linear-gradient(135deg,rgba(0,212,255,.03),var(--surface));}
+
+/* CONTACT FORM */
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:18px;margin-top:44px;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.cf-group{display:flex;flex-direction:column;gap:6px;}
+.cf-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);}
+.cf-input{background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s;width:100%;}
+.cf-input:focus{border-color:var(--cyan);}
+.cf-textarea{min-height:130px;resize:vertical;line-height:1.6;}
+.cf-submit{background:linear-gradient(135deg,var(--cyan),#a855f7);color:#fff;border:none;border-radius:14px;padding:16px 32px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;transition:all .2s;box-shadow:0 0 24px rgba(0,212,255,.2);align-self:flex-start;}
+.cf-submit:hover{transform:scale(1.03);box-shadow:0 0 36px rgba(0,212,255,.35);}
+.cf-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+@media(max-width:600px){.cf-row{grid-template-columns:1fr;}.contact-form{padding:24px 20px;}}
 </style>
 </head>
 <body>
@@ -441,13 +463,130 @@ footer{border-top:1px solid var(--border);padding:48px;display:grid;grid-templat
   </div>
 </section>
 
+<!-- FAQ SECTION -->
+<section id="faq" style="max-width:780px;">
+  <span class="sec-label reveal">Support</span>
+  <h2 class="sec-h reveal">Frequently Asked Questions</h2>
+  <p class="sec-sub reveal">Can't find what you're looking for? Email us at <a href="mailto:pablo@fusioncrsfl.com" style="color:var(--cyan);">pablo@fusioncrsfl.com</a></p>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:44px;" id="faq-list">
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>How many players can join a game?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Starter plan supports up to 15 players. Team plan supports up to 50. Business plan supports unlimited players. Players join from any phone or laptop — no app download needed.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Do players need to create an account?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">No. Players just go to the game URL, tap "Join a Game", enter the room code and their name — that's it. No signup, no download, no friction.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>How does the AI quiz generation work?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">You type a topic (e.g. "FusionCRS cleaning techniques") or upload a PDF/document. Claude AI reads your content and writes perfect multiple-choice questions in seconds. You can generate 5 to 50 questions per pack, with optional DALL-E 3 images for each question.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Does it work for remote teams on Zoom or Teams?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Yes, perfectly. The host shares their screen showing the question. Players have the game open on their own device and tap their answer. It works great over any video conferencing platform.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What is the 14-day free trial?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Every plan comes with a 14-day free trial. No credit card required to start. You get full access to all features on your chosen plan during the trial. Cancel anytime before the trial ends and you won't be charged.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Can I use my own company training materials?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Absolutely — that's one of the most popular use cases. Upload your employee handbook, training manuals, SDS sheets, procedures guides, or any PDF document. The AI reads it and generates accurate questions based on your actual content.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Can I cancel my subscription anytime?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Yes, cancel anytime with no penalties. Your subscription remains active until the end of the billing period you already paid for. We don't do lock-in contracts.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What payment methods are accepted?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">We accept all major credit and debit cards, Google Pay, Apple Pay, and Link (one-click checkout). Payments are securely processed by Stripe.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>How do I change the quiz music theme?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Tap the 🎵 button in the top right corner during any screen. Choose from Modern EDM, Halloween, Christmas, Summer, or Party themes. The theme syncs to all players instantly — even during a live game.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Is there a limit on how many quiz packs I can create?</span><span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Starter plan includes 5 custom packs. Team and Business plans include unlimited custom packs. All plans include 14 built-in packs ready to play immediately.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="contact" style="max-width:680px;">
+  <span class="sec-label reveal">Contact</span>
+  <h2 class="sec-h reveal">Get in Touch</h2>
+  <p class="sec-sub reveal">Have a question not covered above? We typically respond within a few hours.</p>
+
+  <form class="contact-form reveal" onsubmit="submitContactForm(event)">
+    <div class="cf-row">
+      <div class="cf-group">
+        <label class="cf-label">Your Name</label>
+        <input type="text" class="cf-input" id="cf-name" placeholder="John Smith" required>
+      </div>
+      <div class="cf-group">
+        <label class="cf-label">Your Email</label>
+        <input type="email" class="cf-input" id="cf-email" placeholder="john@company.com" required>
+      </div>
+    </div>
+    <div class="cf-group">
+      <label class="cf-label">Subject</label>
+      <select class="cf-input" id="cf-subject">
+        <option value="general">General Question</option>
+        <option value="billing">Billing / Subscription</option>
+        <option value="technical">Technical Issue</option>
+        <option value="feature">Feature Request</option>
+        <option value="enterprise">Enterprise / Custom Plan</option>
+      </select>
+    </div>
+    <div class="cf-group">
+      <label class="cf-label">Message</label>
+      <textarea class="cf-input cf-textarea" id="cf-message" placeholder="Tell us how we can help..." required></textarea>
+    </div>
+    <div id="cf-status" style="font-size:14px;font-weight:700;min-height:20px;"></div>
+    <button type="submit" class="cf-submit" id="cf-btn">Send Message ✉️</button>
+  </form>
+</section>
+
 <!-- CTA BANNER -->
 <div class="cta-wrap">
   <h2 class="cta-t">Ready to run your<br>first game?</h2>
   <p class="cta-s">14-day free trial. No credit card required. Set up in under 5 minutes.</p>
   <div class="cta-btns">
     <a href="https://buy.stripe.com/3cI6oI5y7113emO5fTbjW01" class="btn-main">🚀 Start Free Today</a>
-    <a href="mailto:hello@fusionquiz.com" class="btn-ghost">✉️ Talk to Us</a>
+    <a href="#contact" class="btn-ghost">✉️ Talk to Us</a>
   </div>
 </div>
 
@@ -468,7 +607,7 @@ footer{border-top:1px solid var(--border);padding:48px;display:grid;grid-templat
     <h4>Company</h4>
     <a href="#">About</a>
     <a href="#">Blog</a>
-    <a href="#">Contact</a>
+    <a href="#contact">Contact</a>
   </div>
   <div class="f-col">
     <h4>Legal</h4>
@@ -483,7 +622,39 @@ footer{border-top:1px solid var(--border);padding:48px;display:grid;grid-templat
 </div>
 
 <script>
-// Scroll reveal with stagger
+// FAQ toggle
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// Contact form — mailto fallback
+function submitContactForm(e) {
+  e.preventDefault();
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').options[document.getElementById('cf-subject').selectedIndex].text;
+  const message = document.getElementById('cf-message').value.trim();
+  const status  = document.getElementById('cf-status');
+  const btn     = document.getElementById('cf-btn');
+
+  const mailtoLink = `mailto:pablo@fusioncrsfl.com`
+    + `?subject=${encodeURIComponent('FusionQuiz: ' + subject + ' - from ' + name)}`
+    + `&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)}`;
+
+  window.location.href = mailtoLink;
+  status.textContent = '✅ Opening your email app...';
+  status.style.color = '#22c55e';
+  btn.textContent = '✅ Done!';
+  setTimeout(() => {
+    status.textContent = 'If your email app didn\'t open, email us directly: pablo@fusioncrsfl.com';
+    status.style.color = 'var(--muted)';
+    btn.disabled = false;
+    btn.textContent = 'Send Message ✉️';
+  }, 3000);
+}
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting){
